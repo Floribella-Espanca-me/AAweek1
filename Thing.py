@@ -1,8 +1,4 @@
 import random
-import numpy as np
-import matplotlib.pyplot as plt
-import time
-
 
 def f(i, a):
     if (a == 'Left'):
@@ -29,34 +25,22 @@ def f(i, a):
         print('Invalid positional')
 
 
-def reward(i):
+def rewardPos(i):
     if (i == 100):
         return 100
     else:
         return 0
 
 
-def randomAction():
-    r = random.uniform(0, 4)
+def randomAction(seed):
+    random.seed(seed)
+    r = random.random()
+    r = r*4
     if (0 <= r <= 1):
-        return 'Up'
+        return ['Up',r]
     if (1 < r <= 2):
-        return 'Down'
+        return ['Down',r]
     if (2 < r <= 3):
-        return 'Left'
+        return ['Left',r]
     if (3 < r <= 4):
-        return 'Right'
-
-
-def runRobot():
-    state = 1
-    r = 0
-    for i in range(0, 1000, 1):
-        action = randomAction()
-        state = f(state, action)
-        if (state == 100):
-            r = r + reward(state)
-            state = 1
-            print('CHEGUEI')
-    print(r)
-    return r
+        return ['Right',r]
