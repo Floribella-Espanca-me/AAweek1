@@ -4,10 +4,20 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 from robotTester import *
+from RewardMatrix import *
+from RobotMatrix import *
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    runWallE(30,1000,10)
+    #runWallE(30,1000,10)
+    EVA=RobotMatrix()
+    EVA.runRobot(20000,10)
+    matrix=EVA.matrix
+    matrix.printHeatMap()
+    #for i in matrix.positionList:
+    #    print(i)
+
+
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
