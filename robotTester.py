@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 import time
 import statistics
 from Robot import *
+from lazyRobot import *
+from RobotMatrix import *
 
 
 
@@ -62,6 +64,17 @@ def runWallE(runs,steps,seed):
     bp3 = ax3.boxplot(rewards)
     ax3.set_xticklabels(['Rewards (seed='+str(seed)+' #runs='+str(runs)+' steps=' +str(steps)+')'])
     fig3.savefig('Rewards.png', bbox_inches='tight')
+
+def runMO(stepsBuild,stepsrun,seed):
+    nextseed = seed
+    EVA = RobotMatrix()
+    EVA.runRobot(stepsBuild, nextseed)
+    matrix = EVA.matrix
+    matrix.printHeatMap()
+    MO=lazyRobot(matrix)
+    nextseed=MO.runRobot(stepsrun,nextseed)
+    print(str(MO.reward))
+
 
 def listavr(list):
     return sum(list) / max(len(list), 1)

@@ -11,7 +11,6 @@ class RobotMatrix:
     def __init__(self):
         self.reward=0
         self.position=1
-        self.goal=0
         self.stepsToGoal=[]
         self.currentStep=0
         self.matrix=RewardMatrix()
@@ -23,7 +22,7 @@ class RobotMatrix:
             nextseed=self.matrixStep(nextseed)
         return nextseed
 
-    def matrixStep(self,seed,):
+    def matrixStep(self,seed):
         randomness = randomAction(seed)
         pos = randomness[0]
         nextseed = randomness[1]
@@ -36,5 +35,8 @@ class RobotMatrix:
             self.stepsToGoal.append(self.currentStep)
             self.currentStep=0
         return nextseed
+
+
+
 
 

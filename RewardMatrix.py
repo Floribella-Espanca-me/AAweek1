@@ -1,4 +1,5 @@
 import math
+import random
 
 import numpy as np
 from matplotlib import pyplot as plt
@@ -38,6 +39,36 @@ class RewardMatrix:
             return 2
         if directional == 'Right':
             return 3
+        else:
+            return -1
+
+    def getIndexDirectional(self,index):
+        if index==0:
+            return 'Up'
+        if index==1:
+            return 'Down'
+        if index==2:
+            return 'Left'
+        if index==3:
+            return 'Right'
+        else:
+            return 'nope'
+
+    def bestAction(self, pos, seed):
+        position=self.positionList[pos-1]
+        maxValue=max(position)
+        index=[]
+        for i in range(len(position)):
+            if position[i]==maxValue:
+                index.append(i)
+        random.seed(seed)
+        r = random.random()
+        r = r * len(index)
+        l= math.floor(r)
+        directional=self.getIndexDirectional(index[l])
+        #print(str(position))
+        #print(str(directional))
+        return [directional,r]
 
     def printHeatMap(self):
         self.positionList[99] = [100, 100, 100, 100]
@@ -56,6 +87,7 @@ class RewardMatrix:
         plt.xticks(fontsize=12);
         plt.tight_layout()
         plt.savefig('colorlist.png')
+        plt.show()
 
 
 

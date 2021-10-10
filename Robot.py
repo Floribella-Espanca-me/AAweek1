@@ -10,7 +10,6 @@ class Robot:
     def __init__(self):
         self.reward=0
         self.position=1
-        self.goal=0
         self.stepsToGoal=[]
         self.currentStep=0
 
