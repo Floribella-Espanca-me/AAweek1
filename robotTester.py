@@ -5,7 +5,7 @@ import statistics
 from Robot import *
 from lazyRobot import *
 from RobotMatrix import *
-
+from greedyRobot import greedyRobot
 
 
 def runWallE(runs,steps,seed):
@@ -74,6 +74,20 @@ def runMO(stepsBuild,stepsrun,seed):
     MO=lazyRobot(matrix)
     nextseed=MO.runRobot(stepsrun,nextseed)
     print(str(MO.reward))
+
+def runAlexa(steps,seed):
+    nextseed=seed
+    Alexa=greedyRobot()
+    nextseed=Alexa.runRobot(steps,nextseed)
+    print(str(Alexa.reward))
+    Alexa.matrix.printHeatMap()
+
+def runGreedyAlexa(steps,seed,greed):
+    nextseed=seed
+    Alexa=greedyRobot(True,greed)
+    nextseed=Alexa.runRobot(steps,nextseed)
+    print(str(Alexa.reward))
+    Alexa.matrix.printHeatMap()
 
 
 def listavr(list):

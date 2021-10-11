@@ -10,7 +10,9 @@ from RobotMatrix import *
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    runMO(20000,50,10)
+    #runMO(20000,50,10)
+    #runAlexa(20000,101)
+    runGreedyAlexa(200000,10,0.6)
     #runWallE(30,1000,10)
     #EVA=RobotMatrix()
     #EVA.runRobot(20000,10)

@@ -1,3 +1,62 @@
+from RewardMatrix import *
+from Thing import *
+
 class greedyRobot:
 
-    
+    global goalPos
+    goalPos=100
+    global startPos
+    startPos=1
+
+    def __init__(self,greedy=False,greed=0.9):
+        self.reward = 0
+        self.position = 1
+        self.stepsToGoal = []
+        self.currentStep = 0
+        self.matrix = RewardMatrix()
+        self.greedy=greedy
+        self.greed=greed
+
+    def runRobot(self,steps,seed):
+        nextseed=seed
+        for i in range(steps):
+            nextseed=self.matrixStep(nextseed)
+        return nextseed
+
+    def matrixStep(self,seed):
+        action=[]
+        pos='something'
+        nextseed=seed
+
+        if not self.greedy:
+            action = self.bestAction(nextseed)
+            pos = action[0]
+            nextseed = action[1]
+        else:
+            random.seed(nextseed)
+            r=random.random()
+            nextseed=r
+            if r>self.greed:
+                action = randomAction(nextseed)
+                pos = action[0]
+                nextseed = action[1]
+            else:
+                action = self.bestAction(nextseed)
+                pos = action[0]
+                nextseed = action[1]
+        #print(pos)
+        self.position = self.matrix.updatePosition(self.position,pos)
+        self.currentStep+=1
+        self.reward =self.reward+rewardPos(self.position)
+        #print(self.position)
+        if(self.position==goalPos):
+            self.position=startPos
+            self.stepsToGoal.append(self.currentStep)
+            self.currentStep=0
+        return nextseed
+
+    def bestAction(self,seed):
+        directional=self.matrix.bestAction(self.position,seed)[0]
+        nextseed=self.matrix.bestAction(self.position,seed)[1]
+        return [directional,nextseed]
+
