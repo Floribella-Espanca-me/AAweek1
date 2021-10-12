@@ -12,14 +12,15 @@ from RobotMatrix import *
 if __name__ == '__main__':
     #runMO(20000,50,10)
     #runAlexa(20000,101)
-    runGreedyAlexa(200000,10,0.6)
-    #runWallE(30,1000,10)
+    #runGreedyAlexa(20000,10,0.1)
+    runWallE(30,1000,10)
     #EVA=RobotMatrix()
     #EVA.runRobot(20000,10)
     #matrix=EVA.matrix
     #matrix.printHeatMap()
     #for i in matrix.positionList:
     #    print(i)
+    #runSmartAlexaTHEWALL(100000,10,0.30,0.30)
 
 
 

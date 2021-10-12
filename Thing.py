@@ -24,12 +24,61 @@ def f(i, a):
     else:
         print('Invalid positional')
 
+def fTHEWALL(i, a):
+    r=-1
+    if (a == 'Left'):
+        if (i % 10 == 1):
+            r=i
+        else:
+            r= i - 1
+        if (r%10==4 and r!=94) or (r%10==7 and r!=7):
+            return i
+        else:
+            return r
+    if (a == 'Right'):
+        if (i % 10 == 0):
+            r= i
+        else:
+            r= i + 1
+        if (r%10==4 and r!=94) or (r%10==7 and r!=7):
+            return i
+        else:
+            return r
+    if (a == 'Up'):
+        if (i <= 10):
+            r= i
+        else:
+            r=i - 10
+        if (r%10==4 and r!=94) or (r%10==7 and r!=7):
+            return i
+        else:
+            return r
+    if (a == 'Down'):
+        if (i >= 91):
+            r= i
+        else:
+            r= i + 10
+        if (r%10==4 and r!=94) or (r%10==7 and r!=7):
+            return i
+        else:
+            return r
+    else:
+        print('Invalid positional')
 
 def rewardPos(i):
     if (i == 100):
         return 100
     else:
         return 0
+
+def rewardPosTHEWALL(current,next):
+    if(next==100):
+        return 100
+    if(current==next):
+        return -0.1
+    else:
+        return 0
+
 
 
 def randomAction(seed):

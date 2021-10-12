@@ -30,6 +30,14 @@ class RewardMatrix:
             self.positionList[position - 1][self.getDirectionalIndex(directional)]=0
         return newPostion
 
+    def updatePositionTHEWALL(self,position,directional):
+        newPostion = Thing.fTHEWALL(position, directional)
+        if newPostion!=position:
+            self.positionList[position-1][self.getDirectionalIndex(directional)]=(1-alpha)*self.positionList[position-1][self.getDirectionalIndex(directional)]+alpha*(Thing.rewardPos(newPostion)+discount*max(self.positionList[newPostion-1]))
+        else:
+            self.positionList[position - 1][self.getDirectionalIndex(directional)]=0
+        return newPostion
+
     def getDirectionalIndex(self,directional):
         if directional == 'Up':
             return 0
