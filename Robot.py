@@ -1,4 +1,4 @@
-from Thing import *
+from ScenarioRules import *
 
 class Robot:
 

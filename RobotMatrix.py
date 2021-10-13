@@ -1,4 +1,6 @@
-from Thing import *
+from lazyRobot import lazyRobot
+
+from ScenarioRules import *
 from RewardMatrix import *
 
 class RobotMatrix:
@@ -21,6 +23,22 @@ class RobotMatrix:
         for i in range(steps):
             nextseed=self.matrixStep(nextseed)
         return nextseed
+
+    def runRobotWTest(self,steps,seed,spacing,testSteps):
+        nextseed=seed
+        testRewardResult=[]
+        for i in range(steps):
+            nextseed=self.matrixStep(nextseed)
+            if i%spacing==0:
+                #print(i)
+                MO = lazyRobot(self.matrix)
+                nextseed = MO.runRobot(testSteps, nextseed)
+                testRewardResult.append(MO.reward/testSteps)
+            #if i==2750:
+                #self.matrix.printHeatMap()
+            #if i == 5000:
+                #self.matrix.printHeatMap()
+        return [nextseed,testRewardResult]
 
     def matrixStep(self,seed):
         randomness = randomAction(seed)

@@ -1,5 +1,7 @@
+from lazyRobot import lazyRobot
+
 from RewardMatrix import *
-from Thing import *
+from ScenarioRules import *
 import math
 
 class greedyRobot:
@@ -23,6 +25,18 @@ class greedyRobot:
         for i in range(steps):
             nextseed=self.matrixStep(nextseed)
         return nextseed
+
+    def runRobotWTest(self,steps,seed,spacing,testSteps):
+        nextseed=seed
+        testRewardResult=[]
+        for i in range(steps):
+            nextseed=self.matrixStep(nextseed)
+            if i%spacing==0:
+                #print(i)
+                MO = lazyRobot(self.matrix)
+                nextseed = MO.runRobot(testSteps, nextseed)
+                testRewardResult.append(MO.reward/testSteps)
+        return [nextseed,testRewardResult]
 
     def changeGreed(self,greed):
         if not self.greedy:

@@ -4,7 +4,7 @@ import random
 import numpy as np
 from matplotlib import pyplot as plt
 
-import Thing
+import ScenarioRules
 import seaborn as sns
 
 
@@ -23,17 +23,17 @@ class RewardMatrix:
 
 
     def updatePosition(self,position,directional):
-        newPostion = Thing.f(position, directional)
+        newPostion = ScenarioRules.f(position, directional)
         if newPostion!=position:
-            self.positionList[position-1][self.getDirectionalIndex(directional)]=(1-alpha)*self.positionList[position-1][self.getDirectionalIndex(directional)]+alpha*(Thing.rewardPos(newPostion)+discount*max(self.positionList[newPostion-1]))
+            self.positionList[position-1][self.getDirectionalIndex(directional)]=(1-alpha)*self.positionList[position-1][self.getDirectionalIndex(directional)]+alpha*(ScenarioRules.rewardPos(newPostion) + discount * max(self.positionList[newPostion - 1]))
         else:
             self.positionList[position - 1][self.getDirectionalIndex(directional)]=0
         return newPostion
 
     def updatePositionTHEWALL(self,position,directional):
-        newPostion = Thing.fTHEWALL(position, directional)
+        newPostion = ScenarioRules.fTHEWALL(position, directional)
         if newPostion!=position:
-            self.positionList[position-1][self.getDirectionalIndex(directional)]=(1-alpha)*self.positionList[position-1][self.getDirectionalIndex(directional)]+alpha*(Thing.rewardPos(newPostion)+discount*max(self.positionList[newPostion-1]))
+            self.positionList[position-1][self.getDirectionalIndex(directional)]=(1-alpha)*self.positionList[position-1][self.getDirectionalIndex(directional)]+alpha*(ScenarioRules.rewardPos(newPostion) + discount * max(self.positionList[newPostion - 1]))
         else:
             self.positionList[position - 1][self.getDirectionalIndex(directional)]=0
         return newPostion
@@ -79,11 +79,11 @@ class RewardMatrix:
         return [directional,r]
 
     def printHeatMap(self):
-        self.positionList[99] = [100, 100, 100, 100]
         maxList=[]
+        #print(str(self.positionList))
         for i in self.positionList:
             maxList.append(max(i))
-
+        maxList[len(maxList)-1]=100
         x = np.array((maxList))
         #print(x)
         dim=int(math.sqrt(len(x)))
@@ -94,7 +94,7 @@ class RewardMatrix:
         plt.yticks(rotation=0, fontsize=16);
         plt.xticks(fontsize=12);
         plt.tight_layout()
-        plt.savefig('colorlist.png')
+        #plt.savefig('colorlist.png')
         plt.show()
 
 

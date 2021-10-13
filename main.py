@@ -10,17 +10,28 @@ from RobotMatrix import *
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    #runMO(20000,50,10)
-    #runAlexa(20000,101)
-    #runGreedyAlexa(20000,10,0.1)
-    runWallE(30,1000,10)
-    #EVA=RobotMatrix()
-    #EVA.runRobot(20000,10)
-    #matrix=EVA.matrix
-    #matrix.printHeatMap()
-    #for i in matrix.positionList:
-    #    print(i)
-    #runSmartAlexaTHEWALL(100000,10,0.30,0.30)
+    #EXERCICIO 1: escolha aleatoria das acoes
+    #runWallE(30,20000,123)
+
+    #EXERCICIO2A: contrucao da matriz Q com escolha aleatoria de acoes (EXPLORATION), testes da matriz Q a diferentes passos da execucao (EXPLOITATION)
+    runEVA(30,20000,400,1000,456)
+
+    #EXERCICIO2b contrucao da matriz Q com escolha das melhores acoes, testes da matriz Q a diferentes passos da execucao
+    #runMO(30,20000,400,100,789)
+
+    #EXERCICIO3 contrucao da matriz Q com acoes aleatorias/melhores acoes com sistema de greed (greed=0.1/0.5/0.9)
+    #runGreedyAlexa(30,20000, 101112, 0.1)
+    #runGreedyAlexa(30, 20000, 131415, 0.5)
+    #runGreedyAlexa(30, 20000, 1617, 0.9)
+    #sistema de greed progressivo (greed inicial=0.3, aumenta a partir de 30% dos passos)
+    #runSmartAlexa(5,50000,1819,0.30,0.30)
+
+    #EXERCICIO4 sistema de greed progressivo com paredes
+    #runSmartAlexaTHEWALL(5,100000,10,0.30,0.30)
+
+
+
+
 
 
 
