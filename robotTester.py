@@ -138,15 +138,18 @@ def runMO(runs, steps, testSpacing,testSteps,seed):
 
 
 
-def runGreedyAlexa(runs,steps,seed,greed):
+def runGreedyAlexa(runs,steps,seed,testSpacing,testSteps,greed):
     nextseed=seed
     avrStepsToGoal=[]
     rewards=[]
     runTimes=[]
+    testRewardPerStep = []
     for i in range(runs):
         Alexa=greedyRobot(True,greed)
         start=time.time()
-        nextseed=Alexa.runRobot(steps,nextseed)
+        exe=Alexa.runRobotWTest(steps,nextseed,testSpacing,testSteps)
+        nextseed=exe[0]
+        testRewardPerStep.append(exe[1])
         end=time.time()
         runtime=(end-start)*1000
         runTimes.append(runtime)
@@ -155,16 +158,20 @@ def runGreedyAlexa(runs,steps,seed,greed):
 
     Alexa.matrix.printHeatMap()
     measure(avrStepsToGoal,rewards,runTimes,runs,steps,seed)
+    measureTest(testRewardPerStep, testSpacing)
 
-def runSmartAlexa(runs,steps,seed,greed,greedIncrement):
+def runSmartAlexa(runs,steps,seed,greed,greedIncrement,testSpacing,testSteps):
     nextseed = seed
     avrStepsToGoal = []
     rewards = []
     runTimes = []
+    testRewardPerStep = []
     for i in range(runs):
         Alexa = greedyRobot(True, greed)
         start = time.time()
-        nextseed=Alexa.runSmartGreedyRobot(steps,nextseed,greed,greedIncrement)
+        exe=Alexa.runSmartGreedyRobot(steps,nextseed,greed,greedIncrement,testSpacing,testSteps)
+        nextseed=exe[0]
+        testRewardPerStep.append(exe[1])
         end = time.time()
         runtime = (end - start) * 1000
         runTimes.append(runtime)
@@ -173,16 +180,20 @@ def runSmartAlexa(runs,steps,seed,greed,greedIncrement):
 
     Alexa.matrix.printHeatMap()
     measure(avrStepsToGoal, rewards, runTimes, runs, steps, seed)
+    measureTest(testRewardPerStep, testSpacing)
 
-def runSmartAlexaTHEWALL(runs,steps,seed,greed,greedIncrement):
+def runSmartAlexaTHEWALL(runs,steps,seed,greed,greedIncrement,testSpacing,testSteps):
     nextseed = seed
     avrStepsToGoal = []
     rewards = []
     runTimes = []
+    testRewardPerStep = []
     for i in range(runs):
         Alexa = greedyRobot(True, greed)
         start = time.time()
-        nextseed=Alexa.runSmartGreedyRobotTHEWALL(steps,nextseed,greed,greedIncrement)
+        exe=Alexa.runSmartGreedyRobotTHEWALL(steps,nextseed,greed,greedIncrement,testSpacing,testSteps)
+        nextseed = exe[0]
+        testRewardPerStep.append(exe[1])
         end = time.time()
         runtime = (end - start) * 1000
         runTimes.append(runtime)
@@ -191,6 +202,7 @@ def runSmartAlexaTHEWALL(runs,steps,seed,greed,greedIncrement):
 
     Alexa.matrix.printHeatMap()
     measure(avrStepsToGoal, rewards, runTimes, runs, steps, seed)
+    measureTest(testRewardPerStep, testSpacing)
 
 
 def listavr(list):

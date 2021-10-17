@@ -44,29 +44,51 @@ class greedyRobot:
         else:
             self.greed=greed
 
-    def runSmartGreedyRobot(self,steps,seed,initialGreed,percentageChange):
+    def runSmartGreedyRobot(self,steps,seed,initialGreed,percentageChange,spacing,testSteps):
         nextseed=seed
         firstchange= math.ceil(steps * percentageChange)
+        testRewardResult = []
         self.changeGreed(initialGreed)
         for i in range(firstchange):
             nextseed=self.matrixStep(nextseed)
+            if i%spacing==0:
+                #print(i)
+                MO = lazyRobot(self.matrix)
+                nextseed = MO.runRobot(testSteps, nextseed)
+                testRewardResult.append(MO.reward/testSteps)
         increasePerStep=(1-initialGreed)/(steps-firstchange)
         for j in range(steps-firstchange):
             nextseed = self.matrixStep(nextseed)
+            if j%spacing==0:
+                #print(i)
+                MO = lazyRobot(self.matrix)
+                nextseed = MO.runRobot(testSteps, nextseed)
+                testRewardResult.append(MO.reward/testSteps)
             self.changeGreed(self.greed+increasePerStep)
-        return nextseed
+        return [nextseed,testRewardResult]
 
-    def runSmartGreedyRobotTHEWALL(self,steps,seed,initialGreed,percentageChange):
+    def runSmartGreedyRobotTHEWALL(self,steps,seed,initialGreed,percentageChange,spacing,testSteps):
         nextseed=seed
         firstchange= math.ceil(steps * percentageChange)
+        testRewardResult = []
         self.changeGreed(initialGreed)
         for i in range(firstchange):
             nextseed=self.matrixStepTHEWALL(nextseed)
+            if i%spacing==0:
+                #print(i)
+                MO = lazyRobot(self.matrix)
+                nextseed = MO.runRobot(testSteps, nextseed)
+                testRewardResult.append(MO.reward/testSteps)
         increasePerStep=(1-initialGreed)/(steps-firstchange)
         for j in range(steps-firstchange):
             nextseed = self.matrixStepTHEWALL(nextseed)
             self.changeGreed(self.greed+increasePerStep)
-        return nextseed
+            if j%spacing==0:
+                #print(i)
+                MO = lazyRobot(self.matrix)
+                nextseed = MO.runRobot(testSteps, nextseed)
+                testRewardResult.append(MO.reward/testSteps)
+        return [nextseed,testRewardResult]
 
     def matrixStepTHEWALL(self,seed):
         action=[]

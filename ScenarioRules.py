@@ -24,6 +24,39 @@ def f(i, a):
     else:
         print('Invalid positional')
 
+def fRandom5(i, a,seed):
+    random.seed(seed)
+    r = random.random()
+    nextseed=r
+    if r>=0.95:
+        return r
+    else:
+        if (a == 'Left'):
+            if (i % 10 == 1):
+                return [i,nextseed]
+            else:
+                return [i - 1,nextseed]
+        if (a == 'Right'):
+            if (i % 10 == 0):
+                return [i,nextseed]
+            else:
+                return [i + 1,nextseed]
+        if (a == 'Up'):
+            if (i <= 10):
+                return [i,nextseed]
+            else:
+                return [i - 10,nextseed]
+        if (a == 'Down'):
+            if (i >= 91):
+                return [i,nextseed]
+            else:
+                return [i + 10,nextseed]
+        else:
+            print('Invalid positional')
+
+#def randomneighboor(i,seed):
+
+
 def fTHEWALL(i, a):
     r=-1
     if (a == 'Left'):
